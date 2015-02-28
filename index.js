@@ -57,17 +57,29 @@ SteamConvert.prototype.convertTo64 = function(steamid) {
     else if (typeof steamid !== 'string') {
       throw new TypeError('SteamID must be a string')
     }
+    else if (steamid.indexOf('U:') !== -1) {
+      // strip brackets
+      if (steamid[0] === '[') {
+        steamid = steamid.substr(1);
+      }
+      if (steamid.slice(-1) === ']') {
+        steamid = steamid.substr(0, steamid.length - 1);
+      }
+      var parts = steamid.substr(2).split(':');
+      var id = 1197960265727 + parseInt(parts[0], 10) + parseInt(parts[1], 10);
+      sid = '7656'  + id;
+    }
     else {
       sidSplit = steamid.split(':')
       , z = sidSplit[2]
       , y = sidSplit[1]
-    }
 
-    if (z && y) {
-      sid = v.plus(z*2).plus(y).toPrecision(17)
-    }
-    else {
-      throw new Error('Invalid SteamID')
+      if (z && y) {
+        sid = v.plus(z * 2).plus(y).toPrecision(17)
+      }
+      else {
+        throw new Error('Invalid SteamID')
+      }
     }
   }
 

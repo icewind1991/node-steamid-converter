@@ -35,6 +35,14 @@ describe('steamidconvert', function() {
         /Invalid SteamID/
       )
     })
+    it('should convert account id with brackets to steamid64', function () {
+      var res = steam.convertTo64('[U:1:64229260]')
+      assert.equal('76561198024494988', res)
+    })
+    it('should convert account id without brackets to steamid64', function () {
+      var res = steam.convertTo64('U:1:64229260')
+      assert.equal('76561198024494988', res)
+    })
   })
 
   describe('.convertToText(sid64)', function() {
