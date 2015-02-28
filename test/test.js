@@ -72,6 +72,10 @@ describe('steamidconvert', function() {
         /Invalid SteamID/
       )
     })
+    it('should convert account id to steam id', function () {
+      var res = steam.convertToText('[U:1:64229260]')
+      assert.equal('STEAM_0:0:32114630', res)
+    })
   })
 
   describe('.convertVanity(base)', function() {

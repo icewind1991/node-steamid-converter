@@ -113,6 +113,10 @@ SteamConvert.prototype.convertToText = function(steamid64) {
       throw new TypeError('SteamID must be a string')
     }
 
+    if (steamid64.indexOf('U:') !== -1) {
+      steamid64 = this.convertTo64(steamid64);
+    }
+
     w = BigNumber(steamid64)
     if (w.mod(2).toPrecision(1) === '1') {
       y = 1
